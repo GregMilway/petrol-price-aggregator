@@ -20,7 +20,7 @@ repos:
       # Sort the imports
       - id: ruff-check
         name: sort imports
-        args: [ --select I --fix]
+        args: [ "--select", "I", "--fix" ]
       # Run the linter.
       - id: ruff-check
       # Run the formatter.
