@@ -24,8 +24,11 @@ class DayOpening(BaseModel):
     is_24_hours: bool
 
 
-class BankHolidayOpening(DayOpening):
+class BankHolidayOpening(BaseModel):
     type: str
+    open_time: time
+    close_time: time
+    is_24_hours: bool
 
 
 class UsualDays(BaseModel):
