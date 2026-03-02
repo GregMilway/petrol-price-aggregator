@@ -33,7 +33,6 @@ def fetch_batched(
             headers=headers,
         )
         data = resp.json()
-        print(data)
         if not resp.ok:
             msg = data["data"]["data"]["message"]
             if END_OF_BATCH_MESSAGE.match(msg):
