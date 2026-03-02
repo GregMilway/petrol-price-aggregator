@@ -45,7 +45,6 @@ class OpeningTimes(BaseModel):
 
 class Station(BaseModel):
     node_id: str
-    mft_organisation_name: str
     public_phone_number: str | None
     trading_name: str
     is_same_trading_and_brand_name: bool
