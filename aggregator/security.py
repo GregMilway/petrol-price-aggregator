@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timedelta
 
 import requests
@@ -8,6 +9,7 @@ class ClientToken:
     def __init__(self):
         self._token: str = ""
         self.expiry: datetime = datetime.now()
+        self.logger: logging.Logger = logging.getLogger("security")
 
     def _fetch_token(self):
         url = FF_BASE_URL + "/oauth/generate_access_token"
@@ -25,5 +27,7 @@ class ClientToken:
 
     def token(self) -> str:
         if not self._token or self.expiry <= datetime.now():
+            self.logger.info("Fetching new token")
             self._fetch_token()
+            self.logger.info("New token expiry: %s", self.expiry)
         return self._token
