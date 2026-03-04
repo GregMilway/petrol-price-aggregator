@@ -1,4 +1,4 @@
-from .fuel import Fuel
+from .fuel import Fuel, FuelType
 from .station import Station
 
-__all__ = ["Station", "Fuel"]
+__all__ = ["Station", "Fuel", "FuelType"]
