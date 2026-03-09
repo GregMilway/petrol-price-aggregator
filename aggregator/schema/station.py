@@ -11,7 +11,7 @@ class Address(BaseModel):
     address_line_1: str
     address_line_2: str | None
     city: str
-    country: str
+    country: str | None
     county: str | None
     postcode: str
     latitude: float
