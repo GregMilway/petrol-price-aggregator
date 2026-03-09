@@ -26,8 +26,8 @@ class Address(SQLModel, table=True):
     postcode: str
     latitude: float
     longitude: float
-    station_id: str = Field(foreign_key="Station.station_id")
-    station: "Station" = Relationship(
+    station_id: str = Field(foreign_key="Stations.station_id")
+    station: "Stations" = Relationship(
         back_populates="location",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
@@ -35,8 +35,8 @@ class Address(SQLModel, table=True):
 
 class Amenity(SQLModel, table=True):
     amenity: str
-    station_id: str = Field(foreign_key="Station.station_id")
-    station: "Station" = Relationship(
+    station_id: str = Field(foreign_key="Stations.station_id")
+    station: "Stations" = Relationship(
         back_populates="amenity",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
@@ -48,8 +48,8 @@ class FuelPrices(SQLModel, table=True):
     price: float
     price_last_updated: datetime = Field(sa_column=Column(DateTime))
     price_change_effective_timestamp: datetime = Field(sa_column=Column(DateTime))
-    station_id: str = Field(foreign_key="Station.station_id")
-    station: "Station" = Relationship(
+    station_id: str = Field(foreign_key="Stations.station_id")
+    station: "Stations" = Relationship(
         back_populates="fuel_prices",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
@@ -58,28 +58,28 @@ class FuelPrices(SQLModel, table=True):
 class FuelTypes(SQLModel, table=True):
     __tablename__ = "fuel_types"
     fuel_type: FuelType
-    station_id: str = Field(foreign_key="Station.station_id")
-    station: "Station" = Relationship(
+    station_id: str = Field(foreign_key="Stations.station_id")
+    station: "Stations" = Relationship(
         back_populates="fuel_type",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
 
 
-class OpeningTime(SQLModel, table=True):
-    __tablename__ = "opening_time"
+class OpeningTimes(SQLModel, table=True):
+    __tablename__ = "opening_times"
     weekday: Weekday
     type: str | None = Field(default=None)
     open: time = Field(sa_column=Column(Time))
     close: time = Field(sa_column=Column(Time))
     is_24_hours: bool
-    station_id: str = Field(foreign_key="Station.station_id")
-    station: "Station" = Relationship(
+    station_id: str = Field(foreign_key="Stations.station_id")
+    station: "Stations" = Relationship(
         back_populates="opening_times",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
 
 
-class Station(SQLModel, table=True):
+class Stations(SQLModel, table=True):
     station_id: str = Field(primary_key=True)
     public_phone_number: str | None = Field(default=None)
     trading_name: str
@@ -111,7 +111,7 @@ class Station(SQLModel, table=True):
         back_populates="station",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
-    opening_times: list[OpeningTime] = Relationship(
+    opening_times: list[OpeningTimes] = Relationship(
         back_populates="station",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
