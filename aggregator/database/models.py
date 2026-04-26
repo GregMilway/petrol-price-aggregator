@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 
 from sqlmodel import Column, DateTime, Field, Relationship, SQLModel, Time
 
-from ..schema import FuelType
+from schema import FuelType
 
 
 class Weekday(StrEnum):
