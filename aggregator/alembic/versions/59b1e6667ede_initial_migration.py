@@ -140,4 +140,6 @@ def downgrade() -> None:
     op.drop_table("amenity")
     op.drop_table("address")
     op.drop_table("stations")
+    op.execute("DROP TYPE fueltype")
+    op.execute("DROP TYPE weekday")
     # ### end Alembic commands ###
