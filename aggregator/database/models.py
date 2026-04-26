@@ -1,5 +1,6 @@
 from datetime import datetime, time
 from enum import StrEnum
+from uuid import UUID, uuid4
 
 from sqlmodel import Column, DateTime, Field, Relationship, SQLModel, Time
 
@@ -18,6 +19,7 @@ class Weekday(StrEnum):
 
 
 class Address(SQLModel, table=True):
+    address_id: UUID = Field(default_factory=uuid4, primary_key=True)
     address_line_1: str
     address_line_2: str | None = Field(default=None)
     city: str
@@ -34,6 +36,7 @@ class Address(SQLModel, table=True):
 
 
 class Amenity(SQLModel, table=True):
+    amenity_id: UUID = Field(default_factory=uuid4, primary_key=True)
     amenity: str
     station_id: str = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
@@ -44,6 +47,7 @@ class Amenity(SQLModel, table=True):
 
 class FuelPrices(SQLModel, table=True):
     __tablename__ = "fuel_prices"
+    fuel_price_id: UUID = Field(default_factory=uuid4, primary_key=True)
     fuel_type: FuelType
     price: float
     price_last_updated: datetime = Field(sa_column=Column(DateTime))
@@ -57,6 +61,7 @@ class FuelPrices(SQLModel, table=True):
 
 class FuelTypes(SQLModel, table=True):
     __tablename__ = "fuel_types"
+    fuel_type_id: UUID = Field(default_factory=uuid4, primary_key=True)
     fuel_type: FuelType
     station_id: str = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
@@ -67,6 +72,7 @@ class FuelTypes(SQLModel, table=True):
 
 class OpeningTimes(SQLModel, table=True):
     __tablename__ = "opening_times"
+    opening_time_id: UUID = Field(default_factory=uuid4, primary_key=True)
     weekday: Weekday
     type: str | None = Field(default=None)
     open: time = Field(sa_column=Column(Time))
@@ -80,7 +86,7 @@ class OpeningTimes(SQLModel, table=True):
 
 
 class Stations(SQLModel, table=True):
-    station_id: str = Field(primary_key=True)
+    station_id: UUID = Field(default_factory=uuid4, primary_key=True)
     public_phone_number: str | None = Field(default=None)
     trading_name: str
     is_same_trading_and_brand_name: bool
