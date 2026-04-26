@@ -26,7 +26,7 @@ class Address(SQLModel, table=True):
     postcode: str
     latitude: float
     longitude: float
-    station_id: str = Field(foreign_key="Stations.station_id")
+    station_id: str = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
         back_populates="location",
         sa_relationship_kwargs={"lazy": "selectin"},
@@ -35,7 +35,7 @@ class Address(SQLModel, table=True):
 
 class Amenity(SQLModel, table=True):
     amenity: str
-    station_id: str = Field(foreign_key="Stations.station_id")
+    station_id: str = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
         back_populates="amenity",
         sa_relationship_kwargs={"lazy": "selectin"},
@@ -48,7 +48,7 @@ class FuelPrices(SQLModel, table=True):
     price: float
     price_last_updated: datetime = Field(sa_column=Column(DateTime))
     price_change_effective_timestamp: datetime = Field(sa_column=Column(DateTime))
-    station_id: str = Field(foreign_key="Stations.station_id")
+    station_id: str = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
         back_populates="fuel_prices",
         sa_relationship_kwargs={"lazy": "selectin"},
@@ -58,7 +58,7 @@ class FuelPrices(SQLModel, table=True):
 class FuelTypes(SQLModel, table=True):
     __tablename__ = "fuel_types"
     fuel_type: FuelType
-    station_id: str = Field(foreign_key="Stations.station_id")
+    station_id: str = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
         back_populates="fuel_type",
         sa_relationship_kwargs={"lazy": "selectin"},
@@ -72,7 +72,7 @@ class OpeningTimes(SQLModel, table=True):
     open: time = Field(sa_column=Column(Time))
     close: time = Field(sa_column=Column(Time))
     is_24_hours: bool
-    station_id: str = Field(foreign_key="Stations.station_id")
+    station_id: str = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
         back_populates="opening_times",
         sa_relationship_kwargs={"lazy": "selectin"},
