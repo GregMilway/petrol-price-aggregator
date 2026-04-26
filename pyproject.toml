@@ -24,3 +24,6 @@ dev = [
 [tool.ruff]
 line-length = 120
 src = ["aggregator"]
+
+[tool.ruff.lint.isort]
+known-local-folder = ["config", "database"]
