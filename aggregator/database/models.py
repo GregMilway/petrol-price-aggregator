@@ -40,7 +40,7 @@ class Amenity(SQLModel, table=True):
     amenity: str
     station_id: UUID = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
-        back_populates="amenity",
+        back_populates="amenities",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
 
@@ -65,7 +65,7 @@ class FuelTypes(SQLModel, table=True):
     fuel_type: FuelType
     station_id: UUID = Field(foreign_key="stations.station_id")
     station: "Stations" = Relationship(
-        back_populates="fuel_type",
+        back_populates="fuel_types",
         sa_relationship_kwargs={"lazy": "selectin"},
     )
 
